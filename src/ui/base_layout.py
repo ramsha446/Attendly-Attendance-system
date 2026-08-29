@@ -18,7 +18,7 @@ def style_background_home():
              """, unsafe_allow_html=True)
 
 
-def style_background_dashbaord():
+def style_background_dashboard():
 
     st.markdown("""
         <style>
@@ -34,7 +34,7 @@ def style_base_layout():
 
     st.markdown("""
         <style>
-                @import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap');
+                @import url('https://fonts.googleapis.com/css2?family=Climate+Crisis:YEAR@1979&display=swap');
                 @import url('https://fonts.googleapis.com/css2?family=Valley+Sans:ital,wght@0,100..900;1,100..900&display=swap');
 
                 /* Hide Top bar of streamlit */
@@ -48,16 +48,16 @@ def style_base_layout():
                 }
 
                 h1 {
-                    font-family: 'Luckiest Guy', 'sans-serif' !important;
-                    font-size: 3.5rem !important;
-                    line-height: 1.1 !important;
+                    font-family: 'Climate Crisis', 'sans-serif' !important;
+                    font-size: 3rem !important;
+                    line-height: 0.9 !important;
                     margin-bottom: 0rem !important;
                 }
 
                 h2 {
-                    font-family: 'Luckiest Guy', 'sans-serif' !important;
+                    font-family: 'Climate Crisis', 'sans-serif' !important;
                     font-size: 2rem !important;
-                    line-height: 1.1 !important;
+                    line-height: 0.9 !important;
                     margin-bottom: 0rem !important;
                     color: black !important;
                 }
@@ -68,7 +68,7 @@ def style_base_layout():
 
                 button {
                     border-radius: 1.5rem !important;
-                    background: #586542 !important;
+                    background: #5865F2 !important;
                     color: white !important;
                     padding: 10px 20px !important;
                     border: none !important;
@@ -95,6 +95,27 @@ def style_base_layout():
 
                 button:hover {
                 transform: scale(1.05)
+                }
+
+                .stTextInput input {
+                    background-color: white !important;
+                    color: black !important;
+                    border: 2px solid white !important;
+                }
+
+                .stTextInput input::placeholder {
+                    color: black !important;
+                    opacity: 0.5 !important;
+                }
+
+                .stTextInput label {
+                    color: black !important;
+                }
+
+                .stTextInput input:focus {
+                    background-color: white !important;
+                    color: black !important;
+                    border: 2px solid white !important;
                 }
         </style>
 

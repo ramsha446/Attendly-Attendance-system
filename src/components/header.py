@@ -10,3 +10,15 @@ def header_home():
         </div>
 
                     """, unsafe_allow_html=True)
+
+
+def header_dashbaord():
+
+    logo_url = "https://i.ibb.co/YTYGn5qV/logo.png"
+    st.markdown(f"""
+        <div style='display: flex; align-items: center; justify-content: center; gap: 10px;'>
+            <img src='{logo_url}' style= 'height: 85px'; />
+            <h1 style='text-align: left; color: #5865F2; white-space: nowrap;'>SNAP</br>CLASS</h1>
+        </div>
+
+                    """, unsafe_allow_html=True)
