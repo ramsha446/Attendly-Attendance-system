@@ -19,7 +19,7 @@ def load_dlib_models():
 
 
     face_recog = dlib.face_recognition_model_v1(
-        face_recognition_models.facee_recognition_model_location()
+        face_recognition_models.face_recognition_model_location()
     )
 
     return detector, shape_pred, face_recog
@@ -103,4 +103,4 @@ def predict_attendance(class_img_np):
 
         if best_match_score <= resemblance_threshold:
             detected_student[predicted_id] = True
-    return detected_student, all_students, len(encoding)
+    return detected_student, all_students, len(encodings)
