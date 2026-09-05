@@ -6,6 +6,8 @@ from src.database.db import check_teacher_exists, create_teacher, teacher_login,
 from src.components.subject_card import subject_card
 from src.components.dialog_create_subject import create_subject_dialog
 from src.components.dialog_share_subject import share_subject_dialog
+from src.components.dialog_add_photos import add_photos_dialog
+
 
 
 def teacher_screen():
@@ -58,9 +60,7 @@ def teacher_dashboard():
             st.rerun()
 
 
-    st.markdown("""
-        <hr style='border: none; border-top: 2px solid grey; margin: 20px 0;'>
-    """,unsafe_allow_html=True)
+    st.divider()
 
     if st.session_state.current_teacher_tab == "take_attendance":
         teacher_tab_take_attendance()
@@ -73,9 +73,58 @@ def teacher_dashboard():
 
 
 def teacher_tab_take_attendance():
+    teacher_id = st.session_state.teacher_data['teacher_id']
+
     st.header('Take AI Attendance')
 
+    if 'attendance_images' not in st.session_state:
+        st.session_state.attendance_images = []
 
+    subjects = get_teacher_subjects(teacher_id)
+
+    if not subjects:
+        st.warning("You haven't created any subjects yet! Please create one to begin!")
+        return
+
+    subject_options = {f"{s['name']} - {s['subject_code']}": s['subject_id'] for s in subjects}
+
+    col1, col2 = st.columns([3, 1])
+
+    with col1:
+        selected_subject_label = st.selectbox('Select Subject', options=list(subject_options.keys()))
+
+    with col2:
+        if st.button('Add Photos', type='primary', icon=':material/photo_library:', width='stretch'):
+            add_photos_dialog()
+
+    selected_subject_id = subject_options[selected_subject_label]
+
+    st.divider()
+
+    if st.session_state.attendance_images:
+        st.header('Added Photos')
+        gallery_cols = st.columns(4)
+
+        for idx, img in enumerate(st.session_state.attendance_images):
+            with gallery_cols[idx % 4]:
+                st.image(img, width='stretch', caption=f'photo {idx+1}')
+
+        c1, c2, c3 = st.columns(3)
+
+        with c1:
+            if st.button('Clear all photos', type='tertiary', width='stretch', icon=':material/delete:'):
+                st.session_state.attendance_images = []
+                st.rerun()
+
+        with c2:
+            has_photos = bool(st.session_state.attendance_images)
+            if st.button('Run Face Analysis', type='primary', width='stretch', icon=':material/analytics:'):
+                with st.spinner('Deep scanning classroom photos...'):
+                    
+
+
+
+    
 def teacher_tab_manage_subjects():
     teacher_id = st.session_state.teacher_data['teacher_id']
     col1, col2 = st.columns(2)
@@ -145,9 +194,7 @@ def teacher_screen_login():
     teacher_username = st.text_input('Enter username', placeholder='Enter username')
     teacher_password = st.text_input('Enter password', type='password', placeholder='Enter password')
 
-    st.markdown("""
-        <hr style='border: none; border-top: 2px solid grey; margin: 20px 0;'>
-    """,unsafe_allow_html=True)
+    st.divider()
 
     btnc1, btnc2 = st.columns(2)
     with btnc1:
@@ -199,9 +246,7 @@ def teacher_screen_register():
     teacher_password = st.text_input('Enter password', type='password', placeholder='Enter password')
     teacher_confirm_pass = st.text_input('Confirm your password', type='password', placeholder='Enter password')
     
-    st.markdown("""
-        <hr style='border: none; border-top: 2px solid grey; margin: 20px 0;'>
-    """,unsafe_allow_html=True)
+    st.divider()
     
     btnc1, btnc2 = st.columns(2)
     with btnc1:

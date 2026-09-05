@@ -97,28 +97,4 @@ def style_base_layout():
                 transform: scale(1.05)
                 }
 
-                .stTextInput input {
-                    background-color: white !important;
-                    color: black !important;
-                    border: 2px solid white !important;
-                }
-
-                .stTextInput input::placeholder {
-                    color: black !important;
-                    opacity: 0.5 !important;
-                }
-
-                .stTextInput label {
-                    color: black !important;
-                }
-
-                .stTextInput input:focus {
-                    background-color: white !important;
-                    color: black !important;
-                    border: 2px solid white !important;
-                }
-
-                [data-testid="stDialog"] h2 {
-                    color: white !important;
-                }
              """, unsafe_allow_html=True)

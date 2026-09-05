@@ -9,11 +9,14 @@ import time
 
 from src.pipelines.face_pipeline import predict_attendance, get_face_embeddings, train_classifier
 from src.pipelines.voice_pipeline import get_voice_embeddings
-from src.database.db import get_all_students, create_student
+from src.database.db import get_all_students, create_student, get_student_subjects, get_student_attendance, unenroll_student_to_subject
 
+from src.components.dialog_enroll import enroll_dialog
+from src.components.subject_card import subject_card
 
 def student_dashboard():
     student_data = st.session_state.student_data
+    student_id = student_data['student_id']
     c1, c2 = st.columns(2, vertical_alignment='center', gap='xxlarge')
     with c1:
         header_dashbaord()
@@ -29,7 +32,63 @@ def student_dashboard():
 
     st.space()
 
+    c1, c2 = st.columns(2)
+    with c1:
+        st.header("Your Enrolled Subjects")
+    with c2:
+        if st.button("Enroll in Subject", type='primary', width='stretch'):
+            enroll_dialog()
+
+    st.divider()
+
+
+    with st.spinner('Loading your enrolled subjects..'):
+        subjects = get_student_subjects(student_id)
+        logs = get_student_attendance(student_id)
+
+    stats_map = {}
+
+    for log in logs:
+        sid = log['subject_id']
+
+        if sid not in stats_map:
+            stats_map[sid] = {"total": 0, "attended": 0}
+
+        stats_map[sid]['total'] += 1
+
+        if log.get('is_present'):
+            stats_map[sid]['attended'] += 1
+
+
+    cols = st.columns(2)
+    for i, sub_node in enumerate(subjects):
+        sub = sub_node['subjects']
+        sid = sub['subject_id']
+
+        stats = stats_map.get(sid, {"total": 0, "attended": 0})
+
+        def unenroll_button():
+            if st.button("Unenroll from this course", type='tertiary', width='stretch', key=f"unenroll_{sid}",icon=':material/delete_forever:'):
+                unenroll_student_to_subject(student_id, sid)
+                st.toast(f'Unenrolled from {sub['name']} successfully!')
+                st.rerun()
+                
+        with cols[i % 2]:
+
+            subject_card(
+                name = sub['name'],
+                code = sub['subject_code'],
+                section = sub['section'],
+                stats = [
+                    ('🗓️', 'Total', stats['total']),
+                    ('✅', 'Attended' , stats['attended']),
+                ],
+                footer_callback = unenroll_button
+            )
+
+
     footer_dashboard()
+
 
 def student_screen():
 
@@ -52,14 +111,6 @@ def student_screen():
     st.header('Login using FaceID', text_alignment='center')
     st.space()
     st.space()
-    st.markdown("""
-                <style>
-                    [data-testid="stCameraInput"] label,
-                    [data-testid="stCameraInput"] label p {
-                        color: black !important;
-                    }
-                </style>
-                    """, unsafe_allow_html=True)
 
     show_registration = False
     photo_source = st.camera_input("position your face in the center")
