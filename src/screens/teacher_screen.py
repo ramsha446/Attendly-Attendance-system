@@ -8,6 +8,7 @@ from src.components.dialog_create_subject import create_subject_dialog
 from src.components.dialog_share_subject import share_subject_dialog
 from src.components.dialog_add_photos import add_photos_dialog
 from src.components.dialog_attendance_result import attendance_result_dialog
+from src.components.dialog_voice_attendance import voice_attendance_dialog
 
 from src.pipelines.face_pipeline import predict_attendance
 
@@ -178,10 +179,6 @@ def teacher_tab_take_attendance():
             voice_attendance_dialog(selected_subject_id)
 
 
-
-
-
-    
 def teacher_tab_manage_subjects():
     teacher_id = st.session_state.teacher_data['teacher_id']
     col1, col2 = st.columns(2)
@@ -216,11 +213,13 @@ def teacher_tab_manage_subjects():
     else:
         st.info("NO SUBJECTS FOUND! CREATE ONE ABOVE.")
 
-    
 
 
 def teacher_tab_attendance_records():
     st.header('Attendance Records')
+
+    teacher_id = st.session_state.teacher_data['teacher_id']
+    
 
 
 
