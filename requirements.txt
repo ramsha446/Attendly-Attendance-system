@@ -1,3 +1,4 @@
+streamlit
 # Utilities
 numpy
 pandas
@@ -16,7 +17,6 @@ bcrypt
 segno # qr code generation
 pillow # Dealing with images
 
-streamlit
 
 librosa
 resemblyzer
