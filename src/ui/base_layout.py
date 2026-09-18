@@ -5,11 +5,11 @@ def style_background_home():
     st.markdown("""
         <style>
                 .stApp {
-                    background-color: #B8C2E6; !important;
+                    background-color: #EEF4F0 !important;
                 }
 
                 .stApp div[data-testid="stColumn"] {
-                    background-color: #E0E3FF !important;
+                    background-color: #FFFFFF !important;
                     padding: 2.5rem !important;
                     border-radius: 5rem !important;
                 }
@@ -23,7 +23,7 @@ def style_background_dashboard():
     st.markdown("""
         <style>
                 .stApp {
-                    background-color: #E0E3FF !important;
+                    background-color: #F5F6F8 !important;
                 }
         </style>
 
@@ -68,7 +68,7 @@ def style_base_layout():
 
                 button {
                     border-radius: 1.5rem !important;
-                    background-color: #5865F2 !important;
+                    background-color: #5B5F97 !important;
                     color: white !important;
                     padding: 10px 20px !important;
                     border: none !important;
@@ -77,7 +77,7 @@ def style_base_layout():
 
                 button[kind="secondary"] {
                     border-radius: 1.5rem !important;
-                    background-color: #EB459E !important;
+                    background-color: #D98E73 !important;
                     color: white !important;
                     padding: 10px 20px !important;
                     border: none !important;
@@ -86,7 +86,7 @@ def style_base_layout():
 
                 button[kind="tertiary"] {
                     border-radius: 1.5rem !important;
-                    background-color: black !important;
+                    background-color: #343A40 !important;
                     color: white !important;
                     padding: 10px 20px !important;
                     border: none !important;
