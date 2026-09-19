@@ -12,7 +12,7 @@ def header_home():
     st.markdown(f"""
         <div style='display: flex; flex-direction: column; align-items: center; justify-content: center; margin-bottom: 1px; margin-top: 20px;'>
             <img src='{logo_url}' style= 'height: 100px'; />
-            <h1 style='text-align: center; color: #454B78; white-space: nowrap;'>Welcome to, ATTENDLY</h1>
+            <h1 class="attendly-home-title" style='text-align: center; color: #454B78; white-space: nowrap;'>Welcome to, ATTENDLY</h1>
         </div>
 
                     """, unsafe_allow_html=True)
@@ -26,9 +26,9 @@ def header_dashbaord():
         logo_url = f"data:image/png;base64,{base64.b64encode(f.read()).decode()}"
 
     st.markdown(f"""
-        <div style='display: flex; align-items: center; justify-content: center; gap: 10px;'>
-            <img src='{logo_url}' style= 'height: 85px'; />
-            <h1 style='text-align: left; color: #454B78; white-space: nowrap;'>ATTENDLY</h1>
+        <div style='display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%;'>
+            <img src='{logo_url}' style= 'height: 85px; flex-shrink: 0;' />
+            <h1 style='text-align: left; color: #454B78; white-space: nowrap; margin: 0; flex-shrink: 0;'>ATTENDLY</h1>
         </div>
 
                     """, unsafe_allow_html=True)
