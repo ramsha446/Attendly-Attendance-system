@@ -178,6 +178,16 @@ def style_base_layout():
                 height: auto !important;
             }
 
+            h1 {
+                font-size: 2rem !important;
+            }
+
+            [data-testid="stMarkdownContainer"] h1 {
+                white-space: normal !important;
+                text-align: center !important;
+                word-break: normal !important;
+            }
+
         }
 
         </style>
